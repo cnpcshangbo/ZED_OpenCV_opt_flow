@@ -38,6 +38,9 @@
 // Sample includes
 #include <SaveDepth.hpp>
 
+// Mouse hover and click
+#include "opencv2/highgui/highgui.hpp"
+
 using namespace sl;
 using namespace cv;
 using namespace std;
