@@ -144,7 +144,7 @@ int main(int argc, char **argv) {
      //capture >> old_frame;
      old_frame = image_ocv.clone();
      cvtColor(old_frame, old_gray, COLOR_BGR2GRAY);
-     //goodFeaturesToTrack(old_gray, p0, 100, 0.3, 7, cv::Mat(), 7, false, 0.04);
+     goodFeaturesToTrack(old_gray, p0, 100, 0.3, 7, cv::Mat(), 7, false, 0.04);
      
      //Creat a window for selecting point
      namedWindow("Click to select point to track",1);
@@ -155,7 +155,16 @@ int main(int argc, char **argv) {
      //show the image
      imshow("Click to select point to track", image_ocv);
 
-     p0 = clicked_point;
+     //p0 = clicked_point;
+     //calc distances
+     //double res = cv::norm(cv::Mat(clicked_point[0]),cv::Mat(p0[0]));
+     Point2f p = p0[0];
+     Point2f q = clicked_point[0];
+     Point2f diff = p - q;
+     float res = cv::sqrt(diff.x*diff.x + diff.y*diff.y);
+     
+     cout << "distance: " << res << endl;
+
      //Wait until user press some key
      waitKey(0);
 
