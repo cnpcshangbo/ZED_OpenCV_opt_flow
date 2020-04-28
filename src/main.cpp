@@ -46,7 +46,17 @@ using namespace cv;
 using namespace std;
 
 cv::Mat slMat2cvMat(sl::Mat& input);
+vector<Point2f> clicked_point;
 void printHelp();
+
+vector<Point2f> CallBackFunc(int event, int x, int y, int flags, void* userdata)
+{
+	if ( event == EVENT_LBUTTONDOWN )
+	{
+		cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
+		return vector<Point2f>{cv::Point2f(x, y)};
+	}
+}
 
 int main(int argc, char **argv) {
 
