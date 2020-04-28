@@ -49,12 +49,13 @@ cv::Mat slMat2cvMat(sl::Mat& input);
 vector<Point2f> clicked_point;
 void printHelp();
 
-vector<Point2f> CallBackFunc(int event, int x, int y, int flags, void* userdata)
+void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 {
 	if ( event == EVENT_LBUTTONDOWN )
 	{
 		cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
-		return vector<Point2f>{cv::Point2f(x, y)};
+		clicked_point =  vector<Point2f>{cv::Point2f(x, y)};
+	        cout << vector<Point2f>{cv::Point2f(x, y)} << endl;
 	}
 }
 
@@ -143,7 +144,21 @@ int main(int argc, char **argv) {
      //capture >> old_frame;
      old_frame = image_ocv.clone();
      cvtColor(old_frame, old_gray, COLOR_BGR2GRAY);
-     goodFeaturesToTrack(old_gray, p0, 100, 0.3, 7, cv::Mat(), 7, false, 0.04);
+     //goodFeaturesToTrack(old_gray, p0, 100, 0.3, 7, cv::Mat(), 7, false, 0.04);
+     
+     //Creat a window for selecting point
+     namedWindow("Click to select point to track",1);
+     
+     //set the callback function for mouse click event
+     setMouseCallback("Click to select point to track", CallBackFunc, NULL);
+     
+     //show the image
+     imshow("Click to select point to track", image_ocv);
+
+     p0 = clicked_point;
+     //Wait until user press some key
+     waitKey(0);
+
      // Create a mask image for drawing purposes
      cv::Mat mask = cv::Mat::zeros(old_frame.size(), old_frame.type());
 
