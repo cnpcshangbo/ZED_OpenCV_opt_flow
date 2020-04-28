@@ -158,12 +158,13 @@ int main(int argc, char **argv) {
      //p0 = clicked_point;
      //calc distances
      //double res = cv::norm(cv::Mat(clicked_point[0]),cv::Mat(p0[0]));
-     Point2f p = p0[0];
-     Point2f q = clicked_point[0];
-     Point2f diff = p - q;
-     float res = cv::sqrt(diff.x*diff.x + diff.y*diff.y);
      
-     cout << "distance: " << res << endl;
+     //Point2f p = p0[0];
+     //Point2f q = clicked_point[0];
+     //Point2f diff = p - q;
+     //float res = cv::sqrt(diff.x*diff.x + diff.y*diff.y);
+     
+     cout << "distance: " << 0 << endl;
 
      //Wait until user press some key
      waitKey(0);
